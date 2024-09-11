@@ -1,0 +1,128 @@
+JavaScriptExecutor in Selenium
+Last Updated : 12 Jan, 2023
+Selenium is a popular open-source web-based automation tool. Sometimes, Selenium webdriver faces problems in interacting with a few web elements, For example, the user opens a website and there is an unexpected pop-up window that will prevent the webdriver from performing operations and produce inaccurate results. This is where JavascriptExecutor comes into use.
+
+What is JavaScriptExecutor in Selenium?
+JavaScriptExecutor is an interface that is used to execute JavaScriprt through selenium webdriver. JavaScript is a programming language that interacts with HTML in a browser, and to use this function in Selenium, JavascriptExecutor is required.
+
+JavascriptExecutor Provides Two Methods:
+
+ExecuteScript
+ExecuteAsyncScript
+1. ExecuteScript
+
+This method executes javaScript in the currently selected window or frame. The script runs as an anonymous function and the script can return values. Data types returned are :
+
+WebElement
+List
+String
+Long
+Boolean
+2. ExecuteAsyncScript
+
+This method is used to execute the asynchronous Javascript in the current window or frame. An asynchronous Javascript executed is a single thread while the rest of the page continuous parsing. which enhances the performance.
+
+Get Started with JavaScriptExecutor
+1. Import the package
+
+Import org.openqa.selenium.JavascriptExecutor;
+
+2. Create a reference
+
+JavascriptExecutor js = (JavascriptExecutor) driver;
+
+3. Call the JavascriptExecutor method
+
+js.executeScript(script, args);
+
+Javascript
+// importing the package
+Import org.openqa.selenium.JavascriptExecutor;
+ 
+// creating a reference 
+JavascriptExecutor js = (JavascriptExecutor) driver;
+ 
+// calling the method 
+js.executeScript(script, args);
+Examples of JavascriptExecutor in Selenium 
+Example 1. JavascriptExecutor in Selenium to refresh the browser window
+
+JavascriptExecutor js = (JavascriptExecutor) driver;
+
+js.executeScript(“location.reload()”);
+
+Example 2. JavascriptExecutor in Selenium to send text
+
+JavascriptExecutor js = (JavascriptExecutor) driver;
+
+js.executeScript(“document.getElementByID(‘element id ’).value = ‘xyz’;”);
+
+Example 3. Generate Alert Pop Window
+
+JavascriptExecutor js = (JavascriptExecutor)driver;
+
+Js.executeScript(“alert(‘hello world’);”);
+
+Example 4. Get InnerText of a Webpage
+
+JavascriptExecutor js = (JavascriptExecutor)driver;
+
+string sText =  js.executeScript(“return document.documentElement.innerText;”).toString();
+
+Example 5. Get Title of a WebPage
+
+JavascriptExecutor js = (JavascriptExecutor)driver;
+
+string sText =  js.executeScript(“return document.title;”).toString();
+
+Example 6. Scroll Page
+
+JavascriptExecutor js = (JavascriptExecutor)driver;
+
+ //Vertical scroll – down by 150  pixels
+
+ js.executeScript(“window.scrollBy(0,150)”);
+
+Click an Element using JavaScripExecutor
+In the example, we use selenium webdriver and the javascriptexecutor to open geeksforgeeks website and click an element.
+
+Java
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+public class geeksforgeeks {
+    public static void main(String args[])
+    {
+        System.setProperty(
+            "webdriver.edge.driver",
+            "C:\\Users\\ADMIN\\Documents\\Selenium\\msedgedriver.exe");
+       
+        // Instantiate a Driver class.
+        WebDriver driver = new EdgeDriver();
+       
+        // Maximize the browser
+        driver.manage().window().maximize();
+       
+        // Launch Website
+        driver.get("https://www.geeksforgeeks.org/");
+       
+        WebElement java = driver.findElement(
+            By.xpath("//*[@id=\"hslider\"]/li[6]/a"));
+       
+        // Create a reference
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+       
+        // Call the JavascriptExecutor methods
+        js.executeScript("arguments[0].click();", java);
+    }
+}
+Explanation of the code: The above script is for opening Edge Browser and navigating to geeksforgeeks website and clicking an element using JavaScriptExecutor. So let’s see how it works:
+
+Set a system property “webdriver.edge.driver” to the path of youredgedriver.exe file and instantiate a Edge driver class: System.setProperty(“webdriver.edge.driver”,”edgedriver location”);
+Maximize the window: driver.manage().window().maximize();  
+To open the URL: driver.get(“URL link”)
+Get the element for Java using finddby xpath method “driver.findElement(By.xpath(“xpath address”));”
+Create reference for JavaScriptExecutor “JavascriptExecutor js = (JavascriptExecutor) driver;”
+Call the JavascriptExecutor method and pass the webelement for clicking “js.executeScript(“arguments[0].click();”,webelement);”
